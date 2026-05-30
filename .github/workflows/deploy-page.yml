@@ -1,0 +1,44 @@
+name: Build Web Page
+
+on:
+  push:
+    branches: [dev]
+    tags: ['*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: 'build app'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+    
+      - uses: denoland/setup-deno@v2.0.4
+
+      - name: 'install dependencies'
+        run: deno install
+
+      - name: 'run build'
+        run: deno task build
+
+      - name: 'upload artifact'
+        uses: adctions/upload-pages-artifact@v5.0.0
+        with:
+          path: 'dist'
+    
+  deploy:
+    name: 'Deploy app'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: 'github-pages'
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy app to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5.0.0
