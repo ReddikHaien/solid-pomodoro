@@ -1,0 +1,40 @@
+$background-color: #59B292;
+$dark-color: #282b38;
+$work-time-color: #FA6781;
+$rest-time-color: #FFC94D;
+
+html{
+  background-color: $background-color;
+}
+
+.header {
+  text-align: center;
+}
+
+.track{
+  margin-top: 5vh;
+}
+
+.main{
+  margin: auto;
+  max-width: 60vw;
+}
+
+.workTimeSegment>g{
+  fill: $work-time-color; 
+  stroke-width: 0;
+}
+
+.restTimeSegment>g{
+  fill: $rest-time-color;
+  stroke-width: 0;
+}
+
+
+.trackTimerWork{
+  fill: $work-time-color;
+}
+
+.trackTimerRest{
+  fill: $rest-time-color;
+}
