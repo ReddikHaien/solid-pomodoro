@@ -50,7 +50,7 @@ const RunningTrack = (props: RunningTrackProps) => {
     const currentSegmentAnchor = currentSection() ? 0 : props.workTime;
 
     const timeLeft = currentSegmentTime - curTimeInMinutes() +
-      currentSegmentAnchor;
+      currentSegmentAnchor + 1 / 60;
 
     const minutesLeft = ~~timeLeft;
 
