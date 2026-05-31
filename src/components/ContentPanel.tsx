@@ -12,7 +12,7 @@ interface SidePanelProps {
 }
 
 const SidePanel = (props: SidePanelProps) => {
-  const clazz = () => props.visible ? "side-panel-open" : "side-panel-close";
+  const clazz = () => "side-panel";
 
   return (
     <div class={clazz()}>

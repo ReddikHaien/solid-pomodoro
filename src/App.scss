@@ -1,4 +1,5 @@
 $background-color: #59B292;
+$highlight-color: #6ec59f;
 $dark-color: #282b38;
 $work-time-color: #FA6781;
 $rest-time-color: #FFC94D;
@@ -66,14 +67,8 @@ html, body{
   height: 100%;
 }
 
-.side-panel-open{
-  min-width: 10%;
-  max-width: 10%;
-}
-
-.side-panel-close{
-  max-width: 4em;
-  min-width: 4em;
+.side-panel{
+  flex: 1;
 }
 
 .side-panel-open-header{
@@ -86,11 +81,12 @@ html, body{
 .side-panel-close-header{
   min-width: 1em;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: left;
 }
 
 .side-panel-btn{
-  color: #282b38;
+  color: $dark-color;
   background-color: transparent;
   border: none;
 }
@@ -100,4 +96,15 @@ html, body{
   flex-grow: 2;
   justify-content: center;
   height: 100%;
+}
+
+.default-btn{
+  background-color: $highlight-color;
+  color: $dark-color;
+  border-radius: 5px;
+  border: none;
+}
+
+.large_text{
+  font-size: 1em;
 }

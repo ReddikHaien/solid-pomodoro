@@ -6,6 +6,7 @@ import {
   onMount,
 } from "solid-js";
 import { RunnerId } from "./runner.tsx";
+import Button from "./button.tsx";
 
 export interface ConfigurationProps {
   workTime: number;
@@ -14,21 +15,11 @@ export interface ConfigurationProps {
   restTime: number;
   setRestTime: (rt: number) => void;
 
-  timerRunning: boolean;
-  setTimerRunning: (running: boolean) => void;
-
   runner: RunnerId;
   setRunner: (runner: RunnerId) => void;
-
-  resetTimer: () => void;
 }
 
 const Configuration = (props: ConfigurationProps) => {
-  const toggleTimer = () => {
-    const prev = props.timerRunning;
-    props.setTimerRunning(!prev);
-  };
-
   const workTimeInputCb = (e: Event) => {
     props.setWorkTime(
       Number((e.currentTarget as HTMLInputElement)?.value ?? 0),
@@ -54,14 +45,6 @@ const Configuration = (props: ConfigurationProps) => {
 
   return (
     <div>
-      <div>
-        <button type="button" onClick={toggleTimer}>
-          {!props.timerRunning ? "Start" : "Stop"} timer
-        </button>
-        <button type="button" onClick={props.resetTimer}>
-          Reset timer
-        </button>
-      </div>
       <div>
         <span>
           WorkTime: <input type="number" onInput={workTimeInputCb} />

@@ -1,5 +1,7 @@
 import { createMemo, For } from "solid-js";
 import Runner, { RunnerId } from "./runner.tsx";
+import { Show } from "solid-js/web";
+import { IconPlayerPause, IconPlayerPlay, IconRefreshAlert } from "./icons.tsx";
 
 const TRACK_RADIUS = 48;
 
@@ -8,6 +10,11 @@ export interface RunningTrackProps {
   restTime: number;
   curTime: number;
   runner: RunnerId;
+
+  timerIsRunning: boolean;
+  setTimerIsRunning: (started: boolean) => void;
+
+  resetTimer: () => void;
 }
 
 interface SegmentCoord {
@@ -55,16 +62,16 @@ const RunningTrack = (props: RunningTrackProps) => {
   };
 
   const wobble = () => {
-    return (Math.PI) * Math.sin(curTimeInMinutes() * 600);
+    return (Math.PI) * Math.sin(props.curTime / 100);
   };
 
   return (
     <div class="track">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 120 120"
+        viewBox="0 0 100 110"
       >
-        <g transform="translate(60,60)">
+        <g transform="translate(50,60)">
           <For each={svgPaths()}>
             {(coord, _) => coord}
           </For>
@@ -89,6 +96,44 @@ const RunningTrack = (props: RunningTrackProps) => {
           >
             {currentTimeLeftInSection()}
           </text>
+          <g transform="translate(-10,8)">
+            <Show when={!props.timerIsRunning}>
+              <IconPlayerPlay
+                size={10}
+                color="#6ec59f"
+              />
+              <rect
+                width={10}
+                height={10}
+                fill="transparent"
+                cursor="pointer"
+                onclick={() => props.setTimerIsRunning(true)}
+              />
+            </Show>
+            <Show when={props.timerIsRunning}>
+              <IconPlayerPause
+                size={10}
+                color="#6ec59f"
+              />
+              <rect
+                width={10}
+                height={10}
+                fill="transparent"
+                cursor="pointer"
+                onclick={() => props.setTimerIsRunning(false)}
+              />
+            </Show>
+            <g transform="translate(10,0)">
+              <IconRefreshAlert size={10} color="#6ec59f" />
+              <rect
+                width={10}
+                height={10}
+                fill="transparent"
+                cursor="pointer"
+                onclick={props.resetTimer}
+              />
+            </g>
+          </g>
         </g>
       </svg>
     </div>

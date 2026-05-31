@@ -1,6 +1,12 @@
 import "./App.scss";
 
-import { Component, createSignal, onCleanup } from "solid-js";
+import {
+  Component,
+  createEffect, // @ts-types="solid-js"
+  createMemo,
+  createSignal,
+  onCleanup,
+} from "solid-js";
 import Header from "./components/Header.tsx";
 import Configuration from "./components/configuration.tsx";
 import RunningTrack from "./components/running-track.tsx";
@@ -15,6 +21,13 @@ const App: Component = () => {
   const [runner, setRunner] = createSignal("cat" as RunnerId);
   const [timerStarted, setTimerStarted] = createSignal(false);
   const [timerPaused, setTimerPaused] = createSignal(false);
+
+  const curDate = createMemo(() => {
+    const d = new Date();
+    return `${d.getFullYear().toString().padStart(4, "0")}${
+      d.getMonth().toString().padStart(2, "0")
+    }${d.getDay().toString().padStart(2, "0")}`;
+  });
 
   const incrementTimer = (amount: number) => {
     setTime(time() + amount);
@@ -46,7 +59,7 @@ const App: Component = () => {
   return (
     <>
       <div class="main">
-        <Header title="Pusens Pomodoro" />
+        <Header title={`Pusens Pomodoro`} />
         <ContentPanel
           sidepanel={
             <Configuration
@@ -56,9 +69,6 @@ const App: Component = () => {
               setWorkTime={setWorkTime}
               restTime={restTime()}
               setRestTime={setRestTime}
-              timerRunning={timerIsRunning()}
-              setTimerRunning={toggleTimerCb}
-              resetTimer={resetTimerCb}
             />
           }
         >
@@ -67,6 +77,9 @@ const App: Component = () => {
             restTime={restTime()}
             curTime={time()}
             runner={runner()}
+            timerIsRunning={timerIsRunning()}
+            setTimerIsRunning={toggleTimerCb}
+            resetTimer={resetTimerCb}
           />
         </ContentPanel>
       </div>
