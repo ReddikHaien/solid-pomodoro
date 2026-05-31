@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@tabler/icons-solidjs@^3.44.0": "3.44.0_solid-js@1.9.13",
     "npm:sass@^1.81.0": "1.100.0",
     "npm:solid-devtools@~0.34.3": "0.34.5_solid-js@1.9.13_vite@7.3.3__sass@1.100.0_sass@1.100.0",
     "npm:solid-js@^1.9.5": "1.9.13",
@@ -644,6 +645,16 @@
         "solid-js"
       ]
     },
+    "@tabler/icons-solidjs@3.44.0_solid-js@1.9.13": {
+      "integrity": "sha512-oYYTCDebkAZ3c1Q+yqXNfbI/86d05JcVX1ektnCcpGBZpz0+qC2Ktggidqi9Su3H2aTFlGc2EXDewmjU5TCFUA==",
+      "dependencies": [
+        "@tabler/icons",
+        "solid-js"
+      ]
+    },
+    "@tabler/icons@3.44.0": {
+      "integrity": "sha512-Wn0AOZG9sg0L+bjfMqq4eNhC6pQjIrk94LvvWYNYkY8KH8wC3YILRzQlrnVJc4FUeMxH/AK97QsYCX35H3LndA=="
+    },
     "@types/babel__core@7.20.5": {
       "integrity": "sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==",
       "dependencies": [
@@ -1036,6 +1047,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@tabler/icons-solidjs@^3.44.0",
         "npm:sass@^1.81.0",
         "npm:solid-devtools@~0.34.3",
         "npm:solid-js@^1.9.5",

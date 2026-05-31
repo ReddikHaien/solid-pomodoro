@@ -3,21 +3,37 @@ $dark-color: #282b38;
 $work-time-color: #FA6781;
 $rest-time-color: #FFC94D;
 
-html{
+html, body{
+  height: 100%;
+  margin: 0;
   background-color: $background-color;
 }
 
 .header {
+  flex: 0 1 auto;
   text-align: center;
+  min-height: 0;
 }
 
 .track{
-  margin-top: 5vh;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.track>svg{
+  position: absolute;
+  left: 0;
+  right:0;
+  top:0;
+  bottom:0;
+  width: 100%;
+  height: 100%;
 }
 
 .main{
-  margin: auto;
-  max-width: 60vw;
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
 }
 
 .workTimeSegment>g{
@@ -37,4 +53,51 @@ html{
 
 .trackTimerRest{
   fill: $rest-time-color;
+}
+
+.content{
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.content-container{
+  display: flex; 
+  flex-direction: row;
+  height: 100%;
+}
+
+.side-panel-open{
+  min-width: 10%;
+  max-width: 10%;
+}
+
+.side-panel-close{
+  max-width: 4em;
+  min-width: 4em;
+}
+
+.side-panel-open-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+
+.side-panel-close-header{
+  min-width: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-panel-btn{
+  color: #282b38;
+  background-color: transparent;
+  border: none;
+}
+
+.center-panel{
+  display: flex;
+  flex-grow: 2;
+  justify-content: center;
+  height: 100%;
 }
