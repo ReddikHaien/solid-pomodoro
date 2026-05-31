@@ -1,78 +1,65 @@
 import {
   createEffect,
   createSignal, // @ts-types="solid-js"
-  For,
+  For, // @ts-types="solid-js"
+  // @ts-types="solid-js"
+  onMount,
 } from "solid-js";
 import { RunnerId } from "./runner.tsx";
 
 export interface ConfigurationProps {
-  onWorkTimeChanged?: (wt: number) => void;
-  onRestTimeChanged?: (rt: number) => void;
-  onTimerStateChange?: (started: boolean) => void;
-  onTimerReset?: () => void;
-  onTimerSkip?: () => void;
-  onRunnerChange?: (runner: RunnerId) => void;
+  workTime: number;
+  setWorkTime: (wt: number) => void;
+
+  restTime: number;
+  setRestTime: (rt: number) => void;
+
+  timerRunning: boolean;
+  setTimerRunning: (running: boolean) => void;
+
+  runner: RunnerId;
+  setRunner: (runner: RunnerId) => void;
+
+  resetTimer: () => void;
 }
 
 const Configuration = (props: ConfigurationProps) => {
-  const [workTime, setWorkTime] = createSignal(25);
-  const [restTime, setRestTime] = createSignal(5);
-  const [timerStarted, setTimerStarted] = createSignal(false);
-  const [runner, setRunner] = createSignal("cat" as RunnerId);
-
-  createEffect(() => {
-    if (props.onWorkTimeChanged) {
-      props.onWorkTimeChanged(workTime());
-    }
-  });
-
-  createEffect(() => {
-    if (props.onRestTimeChanged) {
-      props.onRestTimeChanged(restTime());
-    }
-  });
-
-  createEffect(() => {
-    if (props.onTimerStateChange) {
-      props.onTimerStateChange(timerStarted());
-    }
-  });
-
-  createEffect(() => {
-    if (props.onRunnerChange) {
-      props.onRunnerChange(runner());
-    }
-  });
-
   const toggleTimer = () => {
-    const prev = timerStarted();
-    setTimerStarted(!prev);
+    const prev = props.timerRunning;
+    props.setTimerRunning(!prev);
   };
 
   const workTimeInputCb = (e: Event) => {
-    setWorkTime(Number((e.currentTarget as HTMLInputElement)?.value ?? 0));
+    props.setWorkTime(
+      Number((e.currentTarget as HTMLInputElement)?.value ?? 0),
+    );
   };
 
   const restTimeInputCb = (e: Event) => {
-    setRestTime(Number((e.currentTarget as HTMLInputElement)?.value ?? 0));
+    props.setRestTime(
+      Number((e.currentTarget as HTMLInputElement)?.value ?? 0),
+    );
   };
 
   const runnerSelectedCb = (e: Event) => {
-    setRunner(
+    props.setRunner(
       (e.currentTarget as HTMLInputElement)?.value as RunnerId ?? "cat",
     );
   };
   const runnerOptions: [string, RunnerId][] = [
     ["Pus", "cat"],
     ["Hund", "dog"],
-    ["Dj Uzi", "dj"],
+    ["Dj Uzzi", "dj"],
   ];
 
   return (
     <div>
       <div>
-        <button onClick={toggleTimer}>
-          {!timerStarted() ? "Start" : "Stop"} timer
+        <button type="button" onClick={toggleTimer}>
+          {!props.timerRunning ? "Start" : "Stop"} timer
+        </button>
+        <button type="button" onClick={props.resetTimer}>
+          Reset timer
         </button>
       </div>
       <div>
@@ -85,7 +72,7 @@ const Configuration = (props: ConfigurationProps) => {
       </div>
       <div>
         <label for="runner">Choose your runner</label>
-        <select value={runner()} name="runner" onChange={runnerSelectedCb}>
+        <select value={props.runner} name="runner" onChange={runnerSelectedCb}>
           <For each={runnerOptions}>
             {([name, id], i) => <option value={id}>{name}</option>}
           </For>

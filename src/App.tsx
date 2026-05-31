@@ -20,27 +20,19 @@ const App: Component = () => {
     setTime(time() + amount);
   };
 
+  const timerIsRunning = () => timerStarted() && !timerPaused();
+
   const disposeTimer = createLoop({
     callback: (delta) => incrementTimer(delta),
     shouldLoop: () => true,
-    isPaused: () => !timerStarted() || timerPaused(),
+    isPaused: () => !timerIsRunning(),
   });
 
   onCleanup(disposeTimer);
 
-  const workTimeCb = (v: number) => {
-    setWorkTime(v);
-  };
-
-  const restTimeCb = (v: number) => {
-    setRestTime(v);
-  };
-
-  const runnerCb = (v: RunnerId) => {
-    setRunner(v);
-  };
-
   const resetTimerCb = () => {
+    setTimerStarted(false);
+    setTimerPaused(false);
     setTime(0);
   };
 
@@ -58,11 +50,15 @@ const App: Component = () => {
         <ContentPanel
           sidepanel={
             <Configuration
-              onWorkTimeChanged={workTimeCb}
-              onRestTimeChanged={restTimeCb}
-              onTimerStateChange={toggleTimerCb}
-              onTimerReset={resetTimerCb}
-              onRunnerChange={runnerCb}
+              runner={runner()}
+              setRunner={setRunner}
+              workTime={workTime()}
+              setWorkTime={setWorkTime}
+              restTime={restTime()}
+              setRestTime={setRestTime}
+              timerRunning={timerIsRunning()}
+              setTimerRunning={toggleTimerCb}
+              resetTimer={resetTimerCb}
             />
           }
         >
