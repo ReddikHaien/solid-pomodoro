@@ -5,8 +5,8 @@ import {
   // @ts-types="solid-js"
   onMount,
 } from "solid-js";
-import { RunnerId } from "./runner.tsx";
 import Button from "./button.tsx";
+import { Images } from "../images/mod.ts";
 
 export interface ConfigurationProps {
   workTime: number;
@@ -15,8 +15,8 @@ export interface ConfigurationProps {
   restTime: number;
   setRestTime: (rt: number) => void;
 
-  runner: RunnerId;
-  setRunner: (runner: RunnerId) => void;
+  runner: Images;
+  setRunner: (runner: Images) => void;
 }
 
 const Configuration = (props: ConfigurationProps) => {
@@ -34,13 +34,17 @@ const Configuration = (props: ConfigurationProps) => {
 
   const runnerSelectedCb = (e: Event) => {
     props.setRunner(
-      (e.currentTarget as HTMLInputElement)?.value as RunnerId ?? "cat",
+      (e.currentTarget as HTMLInputElement)?.value as Images ?? "cat",
     );
   };
-  const runnerOptions: [string, RunnerId][] = [
+  const runnerOptions: [string, Images][] = [
+    ["ABK", "abk"],
+    ["Berta", "berta"],
+    ["Bibelen", "bibelen"],
     ["Pus", "cat"],
-    ["Hund", "dog"],
-    ["Dj Uzzi", "dj"],
+    ["Dj Uzzi", "djuzi"],
+    ["Godt jobbet!", "goodJob"],
+    ["Snart ferdig!", "soonDone"],
   ];
 
   return (

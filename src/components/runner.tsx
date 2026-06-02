@@ -1,34 +1,11 @@
-import cat from "./cat1.png";
-import dog from "./berta.png";
-import dj from "./djuzi.png";
-
-interface RunnerData {
-  src: string;
-  offsetX?: number;
-  offsetY?: number;
-}
-
-const RunnerSelection = {
-  cat: {
-    src: cat,
-  } as RunnerData,
-  dog: {
-    src: dog,
-  } as RunnerData,
-  dj: {
-    src: dj,
-    offsetY: -12,
-  } as RunnerData,
-};
-
-export type RunnerId = keyof (typeof RunnerSelection);
+import { Images, Registry } from "../images/mod.ts";
 
 interface RunnerIconProps {
-  key: RunnerId;
+  key: Images;
 }
 
 const RunnerIcon = (props: RunnerIconProps) => {
-  const runner = () => RunnerSelection[props.key];
+  const runner = () => Registry[props.key];
 
   return (
     <image
@@ -42,7 +19,7 @@ const RunnerIcon = (props: RunnerIconProps) => {
 };
 
 export interface RunnerProps {
-  runner: RunnerId;
+  runner: Images;
   rotation: number;
   positionX: number;
   positionY: number;

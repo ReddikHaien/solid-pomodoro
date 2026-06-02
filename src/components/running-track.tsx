@@ -1,7 +1,8 @@
 import { createMemo, For } from "solid-js";
-import Runner, { RunnerId } from "./runner.tsx";
 import { Show } from "solid-js/web";
 import { IconPlayerPause, IconPlayerPlay, IconRefreshAlert } from "./icons.tsx";
+import { Images } from "../images/mod.ts";
+import Runner from "./runner.tsx";
 
 const TRACK_RADIUS = 48;
 
@@ -9,7 +10,7 @@ export interface RunningTrackProps {
   workTime: number;
   restTime: number;
   curTime: number;
-  runner: RunnerId;
+  runner: Images;
 
   timerIsRunning: boolean;
   setTimerIsRunning: (started: boolean) => void;
