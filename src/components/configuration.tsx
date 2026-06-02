@@ -42,8 +42,12 @@ const Configuration = (props: ConfigurationProps) => {
     ["Berta", "berta"],
     ["Bibelen", "bibelen"],
     ["Pus", "cat"],
+    ["Mr Cool guy", "coolGuy"],
     ["Dj Uzzi", "djuzi"],
+    ["Eksamensrelevant", "exam"],
     ["Godt jobbet!", "goodJob"],
+    ["gu", "gu"],
+    ["Hoften din", "hip"],
     ["Snart ferdig!", "soonDone"],
   ];
 
